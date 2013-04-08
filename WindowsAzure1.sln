@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "WindowsAzure1", "WindowsAzure1\WindowsAzure1.ccproj", "{A42CCFFF-0425-4DFA-86AC-DC3F73006659}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFServiceWebRole1", "WCFServiceWebRole1\WCFServiceWebRole1.csproj", "{FE616A11-0C7B-407E-BAEE-9EDE7BCCAFEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataClasses", "DataClasses", "{6320B674-D24F-4542-BD82-C9ADC179714A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WA2DiffDAO", "WA2DiffDAO\WA2DiffDAO.csproj", "{76103135-6A34-4946-8219-FBD1725C9E99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A42CCFFF-0425-4DFA-86AC-DC3F73006659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A42CCFFF-0425-4DFA-86AC-DC3F73006659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A42CCFFF-0425-4DFA-86AC-DC3F73006659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A42CCFFF-0425-4DFA-86AC-DC3F73006659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE616A11-0C7B-407E-BAEE-9EDE7BCCAFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE616A11-0C7B-407E-BAEE-9EDE7BCCAFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE616A11-0C7B-407E-BAEE-9EDE7BCCAFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE616A11-0C7B-407E-BAEE-9EDE7BCCAFEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76103135-6A34-4946-8219-FBD1725C9E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76103135-6A34-4946-8219-FBD1725C9E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76103135-6A34-4946-8219-FBD1725C9E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76103135-6A34-4946-8219-FBD1725C9E99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{76103135-6A34-4946-8219-FBD1725C9E99} = {6320B674-D24F-4542-BD82-C9ADC179714A}
+	EndGlobalSection
+EndGlobal
