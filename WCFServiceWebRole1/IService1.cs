@@ -13,7 +13,9 @@ namespace WCFServiceWebRole1
     [ServiceContract]
     public interface IService1
     {
-  
+        [WebGet(UriTemplate = "/getJSON", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        List<Players> getAllPlayers();
+
         [WebInvoke(UriTemplate="/putStrings",RequestFormat=WebMessageFormat.Json,Method="PUT",ResponseFormat=WebMessageFormat.Json,BodyStyle=WebMessageBodyStyle.Bare)]
         String putJob(DiffRequest request);
         // TODO: Add your service operations here

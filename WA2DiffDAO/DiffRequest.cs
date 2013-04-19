@@ -13,7 +13,7 @@ namespace Wa2.DaoClasses
         public String original { get; set; }
         [DataMember(Order = 1)]
         public String edited {get;set;}
-        [DataMember(Order = 3)]
+        [DataMember(Order = 2)]
         public int hash { get; set; }
 
         public DiffRequest(String original, String edited)
