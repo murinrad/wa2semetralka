@@ -13,6 +13,7 @@ using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure;
 using Wa2.DaoClasses;
+using WA2DiffDAO;
 namespace WCFServiceWebRole1
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
@@ -38,78 +39,78 @@ namespace WCFServiceWebRole1
             queueClient = QueueClient.CreateFromConnectionString(connStringToQueue, queueName);
         }
 
-        public List<Players> getAllPlayers()
-        {
-            Players p = new Players();
-            p.Name = "Carlos";
-            p.Sports = "MMM";
-            p.Country = "Labrador";
-            p.ImageUrl = "asdfa";
-            List<Players> list = new List<Players>();
-            list.Add(p);
-            return list;
-        }
 
 
         public string putJob(DiffRequest req)
         {
+            req.hash = String.Concat(req.original, req.edited).GetHashCode();
             DiffRequest package = req;
-            if (!jobInMemory(req.hash))
+            if (!jobInMemory(package.hash))
             {
+                insertIntoTable(package.hash);
                 queueClient.Send(new BrokeredMessage(req));
-                insertIntoTable(req.hash);
+               
 
             }
-            return package.hash + "";
+            return req.hash + "";
         }
 
         public void insertIntoTable(int hash)
         {
             DiffResult newVal = new DiffResult((hash));
-            TableOperation op = TableOperation.Insert(newVal);
+            DiffResultPersistable p = new DiffResultPersistable(newVal);
+            TableOperation op = TableOperation.Insert(p);
             table.Execute(op);
+         /*   DiffResult res = getResult(hash + "");
+            if (res.data == null)
+            {
+                throw new Exception();
+            }*/
         }
 
         private Boolean jobInMemory(int hash)
         {
-            TableQuery<DiffResult> query = new TableQuery<DiffResult>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, hash + ""));
-            IEnumerable<DiffResult> res = table.ExecuteQuery(query);
-            List<DiffResult> result = res.ToList<DiffResult>();
+            TableQuery<DiffResultPersistable> query = new TableQuery<DiffResultPersistable>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, hash + ""));
+            IEnumerable<DiffResultPersistable> res = table.ExecuteQuery(query);
+            List<DiffResultPersistable> result = res.ToList<DiffResultPersistable>();
             return result.Count != 0;
 
         }
 
-        public string getResult(String hash)
+        public DiffResult getResult(String hash)
         {
-            TableQuery<DiffResult> query = new TableQuery<DiffResult>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, hash));
-            IEnumerable<DiffResult> res = table.ExecuteQuery(query);
-            String last = "N/A";
+            TableQuery<DiffResultPersistable> query = new TableQuery<DiffResultPersistable>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, hash));
+            IEnumerable<DiffResultPersistable> res = table.ExecuteQuery(query);
+            DiffResult last = new DiffResult(int.Parse(hash));
             Boolean isThere = false;
-            foreach (DiffResult r in res)
+            WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.NotModified;
+            foreach (DiffResultPersistable r in res)
             {
-                last = r.jobID + "";
                 isThere = true;
-
+           //     try
+             //   {
+                    if (r.data.isFinished)
+                    {
+                        last = r.data;
+                        WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.OK;
+                    }
+             //   }
+             //   catch (NullReferenceException ex)
+            //    {
+                  //  isThere = false;
+           //     }
             }
             if (!isThere)
             {
-                try
-                {
-                    DiffResult newVal = new DiffResult(int.Parse(hash));
-                    TableOperation op = TableOperation.Insert(newVal);
-                    table.Execute(op);
-                }
-                catch (FormatException e)
-                {
-                    return "The ID needs to be a number";
-                }
-                catch (OverflowException e)
-                {
-                    return "ID value too large";
-                }
-
+                WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.NotFound;
             }
+
             return last;
+
+
+
+
+
         }
     }
 }

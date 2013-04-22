@@ -13,7 +13,7 @@ namespace Wa2.Operations
         /**
          * Performs the diff and returns the string formatted according to the diff string specifications
          **/
-      String getDiff(DiffRequest req);
+      DiffResult getDiff(DiffRequest req);
 
     }
 }

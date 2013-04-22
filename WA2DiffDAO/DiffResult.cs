@@ -8,16 +8,20 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.WindowsAzure;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 
 namespace Wa2.DaoClasses
 {
     [DataContract]
-    public class DiffResult : TableEntity
+    public class DiffResult
     {
 
-        public LinkedList<Tuple<ChangeType,String>> data;
+        [DataMember(Order = 0)]
+        public LinkedList<Tuple<int, ChangeType, string>> data { get; set; }
+        [DataMember(Order = 1)]
         public Boolean isFinished { get; set; }
+        [DataMember(Order = 2)]
         public int jobID { get; set; }
 
         public enum ChangeType
@@ -34,18 +38,18 @@ namespace Wa2.DaoClasses
         {
             this.jobID = jobID;
             //rowKey and PartitionKey is inherited from table entity and server as unique identifiers of the object in the hashtable
-            this.RowKey = jobID + "";
-            this.PartitionKey = jobID + "";
             isFinished = false;
-            data = new LinkedList<Tuple<ChangeType, string>>();
+            data = new LinkedList<Tuple<int,ChangeType, string>>();
         }
 
-        public void addLine(ChangeType typeOfChange, string line)
+        public DiffResult() { }
+
+        public void addLine(int lineNo,ChangeType typeOfChange, string line)
         {
-            data.AddLast(new Tuple<ChangeType, String>(typeOfChange, line));
+            data.AddLast(new Tuple<int,ChangeType, string>(lineNo,typeOfChange, line));
         }
 
-        public LinkedList<Tuple<ChangeType, String>> getRawData()
+        public LinkedList<Tuple<int, ChangeType, string>> getRawData()
         {
             return data;
         }
@@ -58,14 +62,12 @@ namespace Wa2.DaoClasses
         public String toString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (Tuple<ChangeType, String> line in data)
+            foreach (Tuple<int,ChangeType, String> line in data)
             {
-                sb.Append(line.Item1).Append(" ").Append(line.Item2).Append("\n");
+                sb.Append(line.Item1).Append(" ").Append(line.Item2).Append(" ").Append(line.Item3).Append("\n");
             }
             return sb.ToString();
         }
-        public DiffResult() { }
-
 
     }
 }
