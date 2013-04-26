@@ -17,7 +17,7 @@
   <WorkerRole name="DiffRequestProcessor">
     <LocalResources>
       <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
-      <LocalStorage name="WCFServiceWebRole1.svclog" />
+      <LocalStorage name="WCFServiceWebRole1.svclog" cleanOnRoleRecycle="false" />
     </LocalResources>
     <ConfigurationSettings>
       <Setting name="cz.ctu.fee.murinrad.azure.servicebus.ConnectionString" />

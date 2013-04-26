@@ -31,7 +31,7 @@
       <Setting name="cz.ctu.fee.murinrad.azure.servicebus.ConnectionString"/>
     </ConfigurationSettings>
     <LocalResources>
-      <LocalStorage name="WCFServiceWebRole1.svclog" cleanOnRoleRecycle="true" sizeInMB="1000" />
+      <LocalStorage name="WCFServiceWebRole1.svclog" cleanOnRoleRecycle="false" sizeInMB="1000" />
     </LocalResources>
   </WorkerRole>
 </ServiceDefinition>

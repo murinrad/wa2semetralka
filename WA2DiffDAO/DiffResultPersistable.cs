@@ -37,7 +37,7 @@ namespace WA2DiffDAO
         public DiffResultPersistable(DiffResult data)
         {
             this.data = data;
-            data.addLine(0, DiffResult.ChangeType.NO_CHANGE, "asd");
+            data.addLine(new ResultLine(ResultLine.ChangeType.ADDITION,0,1,0,1));
             this.RowKey = data.jobID + "";
             this.PartitionKey = data.jobID + "";
             this.test = "asdasdasdasdasda" + data.jobID;

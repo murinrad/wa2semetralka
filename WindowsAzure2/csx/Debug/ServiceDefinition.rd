@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WindowsAzure2" generation="1" functional="0" release="0" Id="3ed22a17-9ef0-4fe8-8983-a127686f9e36" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WindowsAzure2" generation="1" functional="0" release="0" Id="91e43b72-b43f-4763-86b0-8bca1c7b42b2" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="WindowsAzure2Group" generation="1" functional="0" release="0">
       <componentports>
@@ -82,7 +82,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="DiffRequestProcessor" generation="1" functional="0" release="0" software="C:\Users\Rado\Dropbox\WA2\semestralka\WindowsAzure1\WindowsAzure2\csx\Debug\roles\DiffRequestProcessor" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="DiffRequestProcessor" generation="1" functional="0" release="0" software="C:\Users\Rado\Documents\GitHub\wa2semetralka\WindowsAzure2\csx\Debug\roles\DiffRequestProcessor" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <settings>
               <aCS name="cz.ctu.fee.murinrad.azure.servicebus.ConnectionString" defaultValue="" />
               <aCS name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" defaultValue="" />
@@ -90,7 +90,7 @@
             </settings>
             <resourcereferences>
               <resourceReference name="DiagnosticStore" defaultAmount="[4096,4096,4096]" defaultSticky="true" kind="Directory" />
-              <resourceReference name="WCFServiceWebRole1.svclog" defaultAmount="[1000,1000,1000]" defaultSticky="false" kind="Directory" />
+              <resourceReference name="WCFServiceWebRole1.svclog" defaultAmount="[1000,1000,1000]" defaultSticky="true" kind="Directory" />
               <resourceReference name="EventStore" defaultAmount="[1000,1000,1000]" defaultSticky="false" kind="LogStore" />
             </resourcereferences>
           </role>
@@ -101,7 +101,7 @@
           </sCSPolicy>
         </groupHascomponents>
         <groupHascomponents>
-          <role name="WCFServiceWebRole1" generation="1" functional="0" release="0" software="C:\Users\Rado\Dropbox\WA2\semestralka\WindowsAzure1\WindowsAzure2\csx\Debug\roles\WCFServiceWebRole1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="WCFServiceWebRole1" generation="1" functional="0" release="0" software="C:\Users\Rado\Documents\GitHub\wa2semetralka\WindowsAzure2\csx\Debug\roles\WCFServiceWebRole1" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
             </componentports>
@@ -134,9 +134,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="f8b7d08a-fb4f-42ac-8436-a8afd5bee935" ref="Microsoft.RedDog.Contract\ServiceContract\WindowsAzure2Contract@ServiceDefinition">
+    <implementation Id="fb51d14b-8cdf-477d-acf2-22d39c944dab" ref="Microsoft.RedDog.Contract\ServiceContract\WindowsAzure2Contract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="47d30d4c-8c4e-41d3-9221-e129b782200d" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="b7e4a690-6dc9-4f83-8634-bb7747e8bf52" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/WindowsAzure2/WindowsAzure2Group/WCFServiceWebRole1:Endpoint1" />
           </inPort>

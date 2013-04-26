@@ -30,7 +30,7 @@
     <Property name="Configuration" value="Debug" />
     <Property name="Platform" value="AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5" />
-    <Property name="OutputDir" value="C:\Users\Rado\Dropbox\WA2\semestralka\WindowsAzure1\WindowsAzure2\obj\Debug\DiffRequestProcessor\" />
+    <Property name="OutputDir" value="C:\Users\Rado\Documents\GitHub\wa2semetralka\WindowsAzure2\obj\Debug\DiffRequestProcessor\" />
     <Property name="EntryPoint" value="DiffRequestProcessor.dll" />
     <Property name="SourceDir" value="" />
     <Property name="SitePhysicalPath" value="" />

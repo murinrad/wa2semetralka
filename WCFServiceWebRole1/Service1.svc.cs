@@ -43,11 +43,11 @@ namespace WCFServiceWebRole1
 
         public string putJob(DiffRequest req)
         {
-            req.hash = String.Concat(req.original, req.edited).GetHashCode();
+            req.calculateHashCode();
             DiffRequest package = req;
             if (!jobInMemory(package.hash))
             {
-                insertIntoTable(package.hash);
+                insertIntoTable(package.hash,req);
                 queueClient.Send(new BrokeredMessage(req));
                
 
@@ -55,17 +55,17 @@ namespace WCFServiceWebRole1
             return req.hash + "";
         }
 
-        public void insertIntoTable(int hash)
+        public void insertIntoTable(int hash,DiffRequest req)
         {
-            DiffResult newVal = new DiffResult((hash));
+            DiffResult newVal = new DiffResult((hash),req);
             DiffResultPersistable p = new DiffResultPersistable(newVal);
             TableOperation op = TableOperation.Insert(p);
             table.Execute(op);
-         /*   DiffResult res = getResult(hash + "");
+            DiffResult res = getResult(hash + "");
             if (res.data == null)
             {
                 throw new Exception();
-            }*/
+            }
         }
 
         private Boolean jobInMemory(int hash)
@@ -81,7 +81,7 @@ namespace WCFServiceWebRole1
         {
             TableQuery<DiffResultPersistable> query = new TableQuery<DiffResultPersistable>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, hash));
             IEnumerable<DiffResultPersistable> res = table.ExecuteQuery(query);
-            DiffResult last = new DiffResult(int.Parse(hash));
+            DiffResult last = new DiffResult(int.Parse(hash),new DiffRequest(new string[0],new string[0]));
             Boolean isThere = false;
             WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.NotModified;
             foreach (DiffResultPersistable r in res)

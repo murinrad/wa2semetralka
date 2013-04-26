@@ -12,12 +12,12 @@ namespace DiffRequestProcessor
 
         public Wa2.DaoClasses.DiffResult getDiff(Wa2.DaoClasses.DiffRequest req)
         {
-            DiffResult result = new DiffResult(req.hash);
-            String original = req.original;
-            String[] originaltokenized = original.Split('\n');
+            DiffResult result = new DiffResult(req.hash,req);
+
+            String[] originaltokenized = req.original;
             int i = 0;
             foreach(String s in originaltokenized) {
-                result.addLine(i++,DiffResult.ChangeType.NO_CHANGE, s);
+                result.addLine(new ResultLine(ResultLine.ChangeType.ADDITION,0,1,0,1));
             }
             return result;
         }
