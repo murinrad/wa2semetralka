@@ -105,6 +105,8 @@ namespace WCFServiceWebRole1
                 WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.NotFound;
             }
 
+            last.requestData = null; //should I return the request data?
+
             return last;
 
 

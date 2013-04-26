@@ -53,7 +53,7 @@ namespace DiffRequestProcessor
                         List<DiffResultPersistable> r = table.ExecuteQuery<DiffResultPersistable>(query).ToList<DiffResultPersistable>();
                         if (r.Count == 0) continue; // request expired
                         DiffResultPersistable persistedResult = r[0];
-                        
+                        result.requestData = persistedResult.data.requestData;
                         persistedResult.data = result;
                         TableOperation insert = TableOperation.InsertOrReplace(persistedResult);
                         table.Execute(insert);

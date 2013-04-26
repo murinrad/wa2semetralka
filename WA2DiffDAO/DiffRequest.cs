@@ -14,15 +14,7 @@ namespace Wa2.DaoClasses
         [DataMember(Order = 1)]
         public String[] edited {get;set;}
         [DataMember(Order = 2)]
-        public int hash
-        {
-            get { return hash; }
-
-            set
-            {
-                calculateHashCode();
-            }
-        }
+        public int hash { get; set; }
 
         public DiffRequest(String[] original, String[] edited)
         {

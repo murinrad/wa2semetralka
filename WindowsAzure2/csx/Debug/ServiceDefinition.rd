@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WindowsAzure2" generation="1" functional="0" release="0" Id="91e43b72-b43f-4763-86b0-8bca1c7b42b2" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WindowsAzure2" generation="1" functional="0" release="0" Id="d1951e40-7a09-478a-a3a5-02c2a8d7b0c2" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="WindowsAzure2Group" generation="1" functional="0" release="0">
       <componentports>
@@ -134,9 +134,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="fb51d14b-8cdf-477d-acf2-22d39c944dab" ref="Microsoft.RedDog.Contract\ServiceContract\WindowsAzure2Contract@ServiceDefinition">
+    <implementation Id="09d1c9d5-5a9f-41d8-baca-edaf77bc324f" ref="Microsoft.RedDog.Contract\ServiceContract\WindowsAzure2Contract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="b7e4a690-6dc9-4f83-8634-bb7747e8bf52" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="56b9fcc0-378e-4b58-86c1-0389fea1f05f" ref="Microsoft.RedDog.Contract\Interface\WCFServiceWebRole1:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/WindowsAzure2/WindowsAzure2Group/WCFServiceWebRole1:Endpoint1" />
           </inPort>
