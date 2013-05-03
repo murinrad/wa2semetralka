@@ -57,9 +57,67 @@ namespace Wa2.DaoClasses
         public String toString()
         {
             StringBuilder sb = new StringBuilder();
+            int pom;
             foreach (ResultLine line in data)
             {
-                sb.Append(line.typeOfChange).Append(" ").Append("bogus").Append(" ").Append("bogus").Append("\n");
+                if (line.file1Lines[0] == line.file1Lines[1])
+                {
+                    sb.Append(line.file1Lines[0]);
+                }
+                else
+                {
+                    sb.Append(line.file1Lines[0]).Append(",").Append(line.file1Lines[1]);
+                }
+
+                sb.Append(ResultLine.ChangeTypeDescription(line.typeOfChange));
+                if (line.file2Lines[0] == line.file2Lines[1])
+                {
+                    sb.Append(line.file2Lines[0]);
+                }
+                else
+                {
+                    sb.Append(line.file2Lines[0]).Append(",").Append(line.file2Lines[1]);
+                }
+                sb.Append("\n");
+                switch (line.typeOfChange)
+                {
+                    case ResultLine.ChangeType.ADDITION:
+                        pom = line.file2Lines[0];
+                        while (pom <= line.file2Lines[1])
+                        {
+                            sb.Append("> ").Append(requestData.edited[pom - 1]);
+                            sb.Append("\n");
+                            pom++;
+                        }
+                        break;
+                    case ResultLine.ChangeType.REMOVAL:
+                        pom = line.file1Lines[0];
+                        while (pom <= line.file1Lines[1])
+                        {
+                            sb.Append("< ").Append(requestData.original[pom - 1]);
+                            sb.Append("\n");
+                            pom++;
+                        }
+                        break;
+                    case ResultLine.ChangeType.CHANGE:
+                        pom = line.file1Lines[0];
+                        while (pom <= line.file1Lines[1])
+                        {
+                            sb.Append("< ").Append(requestData.original[pom - 1]);
+                            sb.Append("\n");
+                            pom++;
+                        }
+                        sb.Append("------\n");
+                        pom = line.file2Lines[0];
+                        while (pom <= line.file2Lines[1])
+                        {
+                            sb.Append("> ").Append(requestData.edited[pom - 1]);
+                            sb.Append("\n");
+                            pom++;
+                        }
+                        break;
+                }
+                sb.Append("\n");
             }
             return sb.ToString();
         }
@@ -70,13 +128,28 @@ namespace Wa2.DaoClasses
     {
         public enum ChangeType
         {
-            [Description("+")]
+            [Description("a")]
             ADDITION,
-            [Description("-")]
+            [Description("d")]
             REMOVAL,
-            [Description("")]
-            NO_CHANGE
+            [Description("c")]
+            CHANGE
         }
+
+        public static string ChangeTypeDescription(Enum ChangeType)
+        {
+            System.Reflection.FieldInfo fi = ChangeType.GetType().GetField(ChangeType.ToString());
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            if (attributes.Length > 0)
+            {
+                return attributes[0].Description;
+            }
+            else
+            {
+                return ChangeType.ToString();
+            }
+        }
+
          [DataMember(Order = 0)]
         public int[] file1Lines {get;set;}
          [DataMember(Order = 1)]
